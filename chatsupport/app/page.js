@@ -60,7 +60,6 @@ const Auth = () => {
 
   const handleEmailSignIn = async () => {
     try {
-      // const userCredential = 
         await signInWithEmailAndPassword(
         auth,
         email,
@@ -69,15 +68,16 @@ const Auth = () => {
         router.push("/main");
     } catch (error) {
       console.error("Sign In Error", error);
-      if (error.code.includes("main/user-not-found")) {
+      if (error.code === "auth/user-not-found") {
         enqueueSnackbar("Wrong email. Please check your email address.", {
           variant: "error",
         });
-      } else if (error.code.includes("main/wrong-password")) {
-        enqueueSnackbar("Wrong password. Please check your password.", {
-          variant: "error",
+      } else if (error.code === "auth/wrong-password") {
+          enqueueSnackbar("Wrong password. Please check your password.", {
+            variant: "error",
         });
-      } else {
+}
+ else {
         enqueueSnackbar("Sign-in failed. Please try again.", {
           variant: "error",
         });
